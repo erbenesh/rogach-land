@@ -104,10 +104,6 @@ export function ProjectPage() {
             </ul>
           </CaseSection>
 
-          <CaseSection title="Что я сделал">
-            <ItemGrid items={caseStudy.contribution} />
-          </CaseSection>
-
           <CaseSection title="Инженерные решения">
             <ItemGrid items={caseStudy.decisions} numbered />
           </CaseSection>

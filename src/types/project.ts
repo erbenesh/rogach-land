@@ -25,7 +25,6 @@ export interface CaseStudy {
   facts: CaseFact[];
   context: string[];
   constraints: string[];
-  contribution: CaseItem[];
   decisions: CaseItem[];
   outcome: string[];
   media?: CaseMedia[];
