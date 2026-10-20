@@ -1,5 +1,6 @@
 import type { LucideIcon } from "lucide-react";
-import { ArrowUpRight, Mail, Phone, Send } from "lucide-react";
+import { ArrowUpRight, Check, Copy, Mail, Phone, Send } from "lucide-react";
+import { useState } from "react";
 import { Container } from "../../components/Container/Container";
 import { phoneHref, site } from "../../data/site";
 import styles from "./Contact.module.css";
@@ -11,6 +12,7 @@ interface ContactLink {
   href: string;
   hint: string;
   external?: boolean;
+  copyable?: boolean;
 }
 
 const links: ContactLink[] = [
@@ -29,7 +31,8 @@ const links: ContactLink[] = [
           label: "Почта",
           value: site.email,
           href: `mailto:${site.email}`,
-          hint: "Откроется ваш почтовый клиент",
+          hint: "Открыть в почте или скопировать адрес",
+          copyable: true,
         },
       ]
     : []),
@@ -46,6 +49,67 @@ const links: ContactLink[] = [
     : []),
 ];
 
+async function copyText(value: string) {
+  try {
+    await navigator.clipboard.writeText(value);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function ContactCard({ icon: Icon, label, value, href, hint, external, copyable }: ContactLink) {
+  const [copied, setCopied] = useState(false);
+
+  const onCopy = async () => {
+    const ok = await copyText(value);
+    if (!ok) return;
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1600);
+  };
+
+  return (
+    <li className={styles.card}>
+      <a
+        href={href}
+        className={styles.link}
+        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      >
+        <span className={styles.icon} aria-hidden="true">
+          <Icon size={20} strokeWidth={1.75} />
+        </span>
+        <span className={styles.text}>
+          <span className={styles.label}>{label}</span>
+          <span className={styles.value}>{value}</span>
+          <span className={styles.hint}>{hint}</span>
+        </span>
+        <ArrowUpRight className={styles.arrow} size={20} strokeWidth={1.75} aria-hidden="true" />
+      </a>
+
+      {copyable ? (
+        <button
+          type="button"
+          className={styles.copyButton}
+          onClick={onCopy}
+          aria-label={copied ? "Адрес скопирован" : `Скопировать ${value}`}
+        >
+          {copied ? (
+            <>
+              <Check size={16} strokeWidth={2} aria-hidden="true" />
+              Скопировано
+            </>
+          ) : (
+            <>
+              <Copy size={16} strokeWidth={1.75} aria-hidden="true" />
+              Скопировать
+            </>
+          )}
+        </button>
+      ) : null}
+    </li>
+  );
+}
+
 export function Contact() {
   return (
     <section id="contact" className={styles.section} aria-labelledby="contact-title">
@@ -61,24 +125,8 @@ export function Contact() {
         </div>
 
         <ul className={styles.list}>
-          {links.map(({ icon: Icon, label, value, href, hint, external }) => (
-            <li key={label}>
-              <a
-                href={href}
-                className={styles.link}
-                {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              >
-                <span className={styles.icon} aria-hidden="true">
-                  <Icon size={20} strokeWidth={1.75} />
-                </span>
-                <span className={styles.text}>
-                  <span className={styles.label}>{label}</span>
-                  <span className={styles.value}>{value}</span>
-                  <span className={styles.hint}>{hint}</span>
-                </span>
-                <ArrowUpRight className={styles.arrow} size={20} strokeWidth={1.75} aria-hidden="true" />
-              </a>
-            </li>
+          {links.map((link) => (
+            <ContactCard key={link.label} {...link} />
           ))}
         </ul>
       </Container>

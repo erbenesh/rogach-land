@@ -55,6 +55,29 @@
   color: var(--color-text);
 }
 
+.emailGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.copyButton {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  color: var(--color-text-muted);
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.copyButton:hover {
+  color: var(--color-text);
+  background: var(--color-surface-elevated);
+}
+
 .year {
   margin: 0;
   font-size: var(--text-sm);
