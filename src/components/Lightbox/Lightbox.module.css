@@ -1,0 +1,129 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding-top: calc(var(--space-5) + var(--safe-top));
+  padding-right: calc(var(--space-5) + var(--safe-right));
+  padding-bottom: calc(var(--space-5) + var(--safe-bottom));
+  padding-left: calc(var(--space-5) + var(--safe-left));
+  background: rgb(8 8 8 / 0.92);
+  backdrop-filter: blur(8px);
+}
+
+.close,
+.nav {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.close:hover,
+.nav:hover {
+  background: var(--color-surface-elevated);
+  border-color: var(--color-text-muted);
+}
+
+.close {
+  top: calc(var(--space-4) + var(--safe-top));
+  right: calc(var(--space-4) + var(--safe-right));
+  z-index: 2;
+}
+
+.nav {
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.prev {
+  left: calc(var(--space-3) + var(--safe-left));
+}
+
+.next {
+  right: calc(var(--space-3) + var(--safe-right));
+}
+
+.figure {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  width: min(100%, 72rem);
+  max-height: calc(100svh - 2.5rem);
+}
+
+.figure img {
+  width: 100%;
+  max-height: calc(100svh - 5.5rem);
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  background: #000;
+}
+
+.figure figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+  padding-inline: 0.15rem;
+}
+
+.caption {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.counter {
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-muted);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .root {
+    animation: fade-in 180ms var(--ease-out);
+  }
+
+  .figure {
+    animation: rise-in 220ms var(--ease-out);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 700px) {
+  .nav {
+    display: none;
+  }
+}

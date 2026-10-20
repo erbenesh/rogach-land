@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://erbenesh.github.io/rogach-land/sitemap.xml

@@ -1,0 +1,37 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--color-text);
+}
+
+.mark {
+  flex-shrink: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  object-fit: contain;
+  /* чёрный фон PNG «растворяется» на тёмном UI, белая марка остаётся */
+  mix-blend-mode: lighten;
+}
+
+.name {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: var(--tracking-tight);
+  white-space: nowrap;
+}
+
+.sm .mark {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.md .mark {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.lg .mark {
+  width: 3rem;
+  height: 3rem;
+}

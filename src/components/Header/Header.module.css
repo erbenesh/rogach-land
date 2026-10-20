@@ -1,0 +1,117 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  padding-top: var(--safe-top);
+  border-bottom: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-bg) 90%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+.inner {
+  padding-block: 0;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: var(--header-bar-height);
+  padding-block: var(--space-2);
+}
+
+.logo {
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.navDesktop {
+  display: none;
+  align-items: center;
+  gap: clamp(1rem, 2vw, 2rem);
+}
+
+.contact {
+  flex-shrink: 0;
+  min-height: 2.75rem;
+  padding: 0.65rem 1.1rem;
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.navLink:hover {
+  color: var(--color-text);
+}
+
+.tabBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-1);
+  min-height: calc(var(--tabbar-height) + var(--safe-bottom));
+  padding-top: var(--space-2);
+  padding-bottom: calc(var(--space-2) + var(--safe-bottom));
+  padding-left: max(var(--space-2), var(--safe-left));
+  padding-right: max(var(--space-2), var(--safe-right));
+  border-top: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-bg) 92%, transparent);
+  backdrop-filter: blur(16px);
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  min-height: 2.75rem;
+  padding: 0.35rem 0.2rem;
+  border-radius: var(--radius-md);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  color: var(--color-text-muted);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.tabActive {
+  color: var(--color-text);
+}
+
+@media (max-width: 379px) {
+  .brand span:last-child {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .header {
+    padding-top: 0;
+  }
+
+  .top {
+    min-height: var(--header-height);
+    padding-block: 0;
+  }
+
+  .navDesktop {
+    display: flex;
+  }
+
+  .tabBar {
+    display: none;
+  }
+}

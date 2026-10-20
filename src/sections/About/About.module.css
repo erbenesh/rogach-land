@@ -1,0 +1,72 @@
+.section {
+  padding-block: var(--space-9);
+  border-top: 1px solid var(--color-border);
+}
+
+.layout {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.heading {
+  margin-bottom: 0;
+}
+
+@media (min-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: var(--space-8);
+    align-items: start;
+  }
+}
+
+.copy {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.copy > p {
+  margin: 0;
+  max-width: 38rem;
+  font-size: var(--text-md);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-muted);
+}
+
+.copy > p:first-child {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.stack {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 38rem;
+  padding-top: var(--space-3);
+}
+
+.stackGroup {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.stackLabel {
+  margin: 0;
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.stackItems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.stackItems li {
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  font-size: var(--text-sm);
+}

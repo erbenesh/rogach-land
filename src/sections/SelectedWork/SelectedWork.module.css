@@ -1,0 +1,8 @@
+.section {
+  padding-block: var(--space-9);
+}
+
+.list {
+  display: grid;
+  gap: var(--space-5);
+}
